@@ -1,0 +1,78 @@
+item-db  | 2023-09-07T12:12:53.314+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=92c8416aed64
+item-app  | 
+item-app  | 
+item-app  | > docker-software-delivery@1.0.0 preinstall /app
+item-db   | 2023-09-07T12:12:53.314+0000 I CONTROL  [initandlisten] db version v3.6.23
+item-db   | 2023-09-07T12:12:53.314+0000 I CONTROL  [initandlisten] git version: d352e6a4764659e0d0350ce77279de3c1f243e5c
+item-db   | 2023-09-07T12:12:53.314+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.2g  1 Mar 2016
+item-db   | 2023-09-07T12:12:53.315+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+item-db   | 2023-09-07T12:12:53.316+0000 I CONTROL  [initandlisten] modules: none
+item-db   | 2023-09-07T12:12:53.316+0000 I CONTROL  [initandlisten] build environment:
+item-db   | 2023-09-07T12:12:53.317+0000 I CONTROL  [initandlisten]     distmod: ubuntu1604
+item-db   | 2023-09-07T12:12:53.318+0000 I CONTROL  [initandlisten]     distarch: x86_64
+item-db   | 2023-09-07T12:12:53.321+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+item-db   | 2023-09-07T12:12:53.324+0000 I CONTROL  [initandlisten] options: { net: { bindIpAll: true } }
+item-db   | 2023-09-07T12:12:53.326+0000 I -        [initandlisten] Detected data files in /data/db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+item-db   | 2023-09-07T12:12:53.326+0000 I STORAGE  [initandlisten] 
+item-db   | 2023-09-07T12:12:53.326+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+item-db   | 2023-09-07T12:12:53.326+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+item-db   | 2023-09-07T12:12:53.326+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3430M,cache_overflow=(file_max=0M),session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),compatibility=(release="3.0",require_max="3.0"),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+item-db   | 2023-09-07T12:12:54.730+0000 I STORAGE  [initandlisten] WiredTiger message [1694088774:730028][1:0x7fec0b92fa40], txn-recover: Main recovery loop: starting at 3/4736
+item-db   | 2023-09-07T12:12:54.930+0000 I STORAGE  [initandlisten] WiredTiger message [1694088774:930264][1:0x7fec0b92fa40], txn-recover: Recovering log 3 through 4
+item-db   | 2023-09-07T12:12:55.045+0000 I STORAGE  [initandlisten] WiredTiger message [1694088775:45769][1:0x7fec0b92fa40], txn-recover: Recovering log 4 through 4
+item-db   | 2023-09-07T12:12:55.117+0000 I STORAGE  [initandlisten] WiredTiger message [1694088775:117857][1:0x7fec0b92fa40], txn-recover: Set global recovery timestamp: 0
+item-db   | 2023-09-07T12:12:55.150+0000 I CONTROL  [initandlisten] 
+item-db   | 2023-09-07T12:12:55.151+0000 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+item-db   | 2023-09-07T12:12:55.151+0000 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+item-db   | 2023-09-07T12:12:55.151+0000 I CONTROL  [initandlisten] 
+item-db   | 2023-09-07T12:12:55.151+0000 I CONTROL  [initandlisten] 
+item-db   | 2023-09-07T12:12:55.151+0000 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.
+item-db   | 2023-09-07T12:12:55.151+0000 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
+item-db   | 2023-09-07T12:12:55.151+0000 I CONTROL  [initandlisten] 
+item-db   | 2023-09-07T12:12:55.161+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+item-db   | 2023-09-07T12:12:55.163+0000 I NETWORK  [initandlisten] listening via socket bound to 0.0.0.0
+item-db   | 2023-09-07T12:12:55.163+0000 I NETWORK  [initandlisten] listening via socket bound to /tmp/mongodb-27017.sock
+item-db   | 2023-09-07T12:12:55.163+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+item-db   | 2023-09-07T12:14:37.678+0000 I NETWORK  [listener] connection accepted from 172.27.0.3:41854 #1 (1 connection now open)
+item-db   | 2023-09-07T12:14:37.694+0000 I NETWORK  [conn1] received client metadata from 172.27.0.3:41854 conn1: { driver: { name: "nodejs", version: "2.2.36" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "5.15.90.1-microsoft-standard-WSL2" }, platform: "Node.js v14.21.3, LE, mongodb-core: 2.1.20" }
+item-db   | 2023-09-07T12:14:52.946+0000 I NETWORK  [conn1] end connection 172.27.0.3:41854 (0 connections now open)
+item-db   | 2023-09-07T12:14:53.486+0000 I CONTROL  [signalProcessingThread] got signal 15 (Terminated), will terminate after current cmd ends
+item-db   | 2023-09-07T12:14:53.487+0000 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+item-db   | 2023-09-07T12:14:53.487+0000 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-27017.sock
+item-db   | 2023-09-07T12:14:53.488+0000 I FTDC     [signalProcessingThread] Shutting down full-time diagnostic data capture
+item-db   | 2023-09-07T12:14:53.505+0000 I STORAGE  [signalProcessingThread] WiredTigerKVEngine shutting down
+item-db   | 2023-09-07T12:14:53.580+0000 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+item-db   | 2023-09-07T12:14:53.581+0000 I CONTROL  [signalProcessingThread] now exiting
+item-db   | 2023-09-07T12:14:53.581+0000 I CONTROL  [signalProcessingThread] shutting down with code:0
+item-app  | > npx npm-force-resolutions
+item-app  | 
+item-app  | 
+item-app  | npx: installed 6 in 3.615s
+item-app  | audited 662 packages in 41.182s
+item-app  | 
+item-app  | 
+item-app  | 7 packages are looking for funding
+item-app  |   run `npm fund` for details
+item-app  | 
+item-app  | 
+item-app  | found 101 vulnerabilities (17 low, 30 moderate, 42 high, 12 critical)
+item-app  |   run `npm audit fix` to fix them, or `npm audit` for details
+item-app  | 
+item-app  | 
+item-app  | > docker-software-delivery@1.0.0 build /app
+item-app  | > node ./node_modules/gulp/bin/gulp.js
+item-app  | 
+item-app  | 
+item-app  | [12:14:12] Using gulpfile /app/gulpfile.js
+item-app  | [12:14:12] Starting 'scripts'...
+item-app  | [12:14:23] Finished 'scripts' after 11 s
+item-app  | [12:14:23] Starting 'default'...
+item-app  | [12:14:23] Finished 'default' after 105 μs
+item-app  | 
+item-app  | 
+item-app  | > docker-software-delivery@1.0.0 start /app
+item-app  | > node ./bin/www
+item-app  | 
+item-app  | 
+item-app  | NODE_ENV: production
+item-app  | Connected to database

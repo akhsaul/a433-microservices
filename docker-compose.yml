@@ -1,0 +1,55 @@
+# set schema version
+version: "3.7"
+
+# make 2 services
+services:
+  item-app:
+    # change container name
+    container_name: item-app
+    # using spesific image
+    image: ghcr.io/akhsaul/item-app:v1
+    # running command npm
+    command: sh -c "npm install --production --unsafe-perm && npm run build && npm start"
+    # expose port for communication
+    ports:
+      - 80:8080
+    # set workdir in container
+    working_dir: /app
+    # using spesific volume
+    volumes:
+      - ./:/app
+    # using spesific network
+    networks:
+      - item-net
+    # set environment
+    environment:
+      NODE_ENV: production
+      DB_HOST: item-db
+    # make this service only run when other service is run
+    depends_on:
+      - item-db
+    # restart when failure
+    restart: on-failure
+
+  item-db:
+    container_name: item-db
+    image: mongo:3
+    volumes:
+      - app-db:/data/db
+    networks:
+      - item-net
+    restart: on-failure
+
+# make new volume
+volumes:
+  app-db:
+    # set spesific volume name
+    name: app-db
+
+# make new network
+networks:
+  item-net:
+    # set spesific network name
+    name: item-net
+    # make it as bridge network
+    driver: bridge
