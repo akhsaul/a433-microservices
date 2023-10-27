@@ -1,0 +1,69 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  # Lint jobs
+  lint-dockerfile:
+    docker:
+      - image: cimg/base:2023.10
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.24
+      - run:
+          name: Lint Dockerfile
+          command: docker run --rm -i ghcr.io/hadolint/hadolint < Dockerfile
+  
+  # Test jobs
+  test-app:
+    docker:
+      - image: cimg/go:1.21.3
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: go mod download
+      - run:
+          name: Run tests
+          command: go test -v -short --count=1 $(go list ./...)
+
+  build-app-karsajobs:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/base:2023.10
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.24
+      - run:
+          name: Login Docker Github
+          command: echo $PASSWORD_DOCKER_HUB | docker login -u $USERNAME_DOCKER_HUB --password-stdin ghcr.io
+      - run:
+          name: Build Docker Image
+          command: docker build -t ghcr.io/${USERNAME_DOCKER_HUB}/karsajobs:latest .
+      - run:
+          name: Push Docker Image
+          command: docker push ghcr.io/${USERNAME_DOCKER_HUB}/karsajobs:latest
+
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  lint-test-build-karsajobs: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - lint-dockerfile
+      - test-app:
+          name: test-app
+          requires:
+            - lint-dockerfile
+      - build-app-karsajobs:
+          name: build-app-karsajobs
+          requires:
+            - test-app
