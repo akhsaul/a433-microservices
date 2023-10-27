@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karsajobs-deployment # Nama unik untuk objek Deployment
+  labels:
+    app: karsajobs  # Label yang diberikan pada Service
+    tier: backend
+spec:
+  replicas: 1 # Jumlah replika pod yang akan dijalankan
+  selector:
+    matchLabels:
+      app: karsajobs
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: karsajobs
+        tier: backend
+    spec:
+      containers:
+      - name: karsajobs
+        image: ghcr.io/akhsaul/karsajobs:latest # pull mage dari github regisry container
+        resources:
+          requests: # Mengatur sumber daya minimum yang diminta
+            memory: "128Mi" # Memori minimum yang diminta (150 Mi = 150 mebibytes)
+            cpu: "50m" # CPU minimum yang diminta (150m = 150 milliCPUs)
+          limits: # Mengatur batas sumber daya
+            memory: "200Mi" # Batas memori
+            cpu: "50m" # Batas CPU (200m = 200 milliCPUs)
+        ports:
+        - containerPort: 8080 # Port yang akan digunakan oleh container
+        env:
+        - name: APP_PORT
+          value: "8080" # Variabel lingkungan untuk konfigurasi aplikasi
+        - name: MONGO_HOST
+          value: mongo-service # Variabel lingkungan untuk host MongoDB
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_ROOT_USERNAME # Variabel lingkungan untuk username MongoDB yang diambil dari secret
+        - name: MONGO_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_ROOT_PASSWORD # Variabel lingkungan untuk password MongoDB yang diambil dari secret
