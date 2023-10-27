@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    # Hanya meminta sebanyak 1GB
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  # Harus menambahkan type hostpath ini dan disimpan ke /mnt/data
+  hostPath:
+    path: "/mnt/data"
+---
+# PVC untuk mongodb data
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      # Hanya meminta sebanyak 1GB
+      storage: 1Gi
